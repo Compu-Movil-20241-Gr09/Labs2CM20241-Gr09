@@ -69,6 +69,7 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.example.jetsnack.R
+import com.example.jetsnack.ui.SnackViewModel
 import com.example.jetsnack.ui.components.JetsnackSurface
 import com.example.jetsnack.ui.home.cart.Cart
 import com.example.jetsnack.ui.home.search.Search
@@ -76,6 +77,7 @@ import com.example.jetsnack.ui.theme.JetsnackTheme
 import java.util.Locale
 
 fun NavGraphBuilder.addHomeGraph(
+    viewModel: SnackViewModel,
     onSnackSelected: (Long, NavBackStackEntry) -> Unit,
     onNavigateToRoute: (String) -> Unit,
     modifier: Modifier = Modifier
@@ -84,7 +86,7 @@ fun NavGraphBuilder.addHomeGraph(
         Feed(onSnackClick = { id -> onSnackSelected(id, from) }, onNavigateToRoute, modifier)
     }
     composable(HomeSections.SEARCH.route) { from ->
-        Search(onSnackClick = { id -> onSnackSelected(id, from) }, onNavigateToRoute, modifier)
+        Search(viewModel = viewModel, onSnackClick = { id -> onSnackSelected(id, from) }, onNavigateToRoute, modifier)
     }
     composable(HomeSections.CART.route) { from ->
         Cart(onSnackClick = { id -> onSnackSelected(id, from) }, onNavigateToRoute, modifier)

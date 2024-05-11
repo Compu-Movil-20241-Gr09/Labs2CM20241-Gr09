@@ -131,4 +131,6 @@ dependencies {
     implementation(libs.retrofit2.kotlinx.serialization.converter)
     implementation(libs.retrofit)
     implementation(libs.kotlinx.serialization.json)
+    // Retrofit with Scalar Converter
+    implementation(libs.converter.scalars)
 }

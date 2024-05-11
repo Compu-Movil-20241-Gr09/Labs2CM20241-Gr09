@@ -24,6 +24,7 @@ import kotlinx.serialization.Serializable
 data class Snack(
     val id: Long,
     val name: String,
+<<<<<<< HEAD
     val imageUrl: String,
     val price: Long,
     val tagline: String = "",
@@ -223,3 +224,10 @@ val snacks = listOf(
     )
 )
 
+=======
+    @SerialName(value = "imageUrl") val imageUrl: String,
+    val price: Long,
+    val tagline: String = "",
+    val tags: Set<String> = emptySet()
+)
+>>>>>>> ad0c2c3f0eb0b3738b2d0875a68fdf28379f3498
