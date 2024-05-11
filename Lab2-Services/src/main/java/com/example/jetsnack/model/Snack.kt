@@ -23,9 +23,8 @@ import kotlinx.serialization.Serializable
 data class Snack(
     val id: Long,
     val name: String,
-    @SerialName(value = "image_url") val imageUrl: String,
+    @SerialName(value = "imageUrl") val imageUrl: String,
     val price: Long,
-    val tagline: String,
+    val tagline: String = "",
     val tags: Set<String> = emptySet()
 )
-
