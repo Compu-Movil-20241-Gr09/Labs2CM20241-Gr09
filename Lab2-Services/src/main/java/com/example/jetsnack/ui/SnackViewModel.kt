@@ -13,9 +13,6 @@ import com.example.jetsnack.SnackApplication
 import com.example.jetsnack.data.SnackRepository
 import com.example.jetsnack.model.Snack
 import com.example.jetsnack.model.User
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException

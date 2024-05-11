@@ -31,7 +31,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
@@ -42,6 +41,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.example.jetsnack.R
+import com.example.jetsnack.model.SnackRepo
 import com.example.jetsnack.ui.home.HomeSections
 import com.example.jetsnack.ui.home.addHomeGraph
 import com.example.jetsnack.ui.navigation.MainDestinations
@@ -94,7 +94,7 @@ private fun NavGraphBuilder.jetsnackNavGraph(
     ) { backStackEntry ->
         val arguments = requireNotNull(backStackEntry.arguments)
         val snackId = arguments.getLong(MainDestinations.SNACK_ID_KEY)
-        SnackDetail(snackId, upPress)
+        SnackDetail(viewModel, snackId, upPress)
     }
 }
 

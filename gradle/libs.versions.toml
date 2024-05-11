@@ -118,6 +118,7 @@ androidx-window = { module = "androidx.window:window", version.ref = "androidx-w
 coil-kt-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 converter-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "converterScalars" }
 core-jdk-desugaring = { module = "com.android.tools:desugar_jdk_libs", version.ref = "jdkDesugar" }
+dagger-hilt-android = { module = "com.google.dagger:hilt-android" }
 google-android-material = { module = "com.google.android.material:material", version.ref = "material" }
 googlemaps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "maps-compose" }
 googlemaps-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "google-maps" }

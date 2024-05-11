@@ -74,7 +74,7 @@ fun Search(
     onSnackClick: (Long) -> Unit,
     onNavigateToRoute: (String) -> Unit,
     modifier: Modifier = Modifier,
-    state: SearchState = rememberSearchState()
+    state: SearchState = rememberSearchState(viewModel)
 ) {
     JetsnackScaffold(
         bottomBar = {
@@ -130,14 +130,15 @@ enum class SearchDisplay {
 
 @Composable
 private fun rememberSearchState(
+    viewModel: SnackViewModel,
     query: TextFieldValue = TextFieldValue(""),
     focused: Boolean = false,
     searching: Boolean = false,
     categories: List<SearchCategoryCollection> = SearchRepo.getCategories(),
     suggestions: List<SearchSuggestionGroup> = SearchRepo.getSuggestions(),
-    filters: List<Filter> = SnackRepo.getFilters(),
     searchResults: List<Snack> = emptyList()
 ): SearchState {
+    val filters = SnackRepo(viewModel).getFilters()
     return remember {
         SearchState(
             query = query,

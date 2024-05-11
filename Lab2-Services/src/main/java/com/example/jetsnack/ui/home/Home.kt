@@ -83,13 +83,13 @@ fun NavGraphBuilder.addHomeGraph(
     modifier: Modifier = Modifier
 ) {
     composable(HomeSections.FEED.route) { from ->
-        Feed(onSnackClick = { id -> onSnackSelected(id, from) }, onNavigateToRoute, modifier)
+        Feed(viewModel = viewModel, onSnackClick = { id -> onSnackSelected(id, from) }, onNavigateToRoute, modifier)
     }
     composable(HomeSections.SEARCH.route) { from ->
         Search(viewModel = viewModel, onSnackClick = { id -> onSnackSelected(id, from) }, onNavigateToRoute, modifier)
     }
     composable(HomeSections.CART.route) { from ->
-        Cart(onSnackClick = { id -> onSnackSelected(id, from) }, onNavigateToRoute, modifier)
+        Cart(snackViewModel = viewModel, onSnackClick = { id -> onSnackSelected(id, from) }, onNavigateToRoute, modifier)
     }
     composable(HomeSections.PROFILE.route) {
         Profile(onNavigateToRoute, modifier)

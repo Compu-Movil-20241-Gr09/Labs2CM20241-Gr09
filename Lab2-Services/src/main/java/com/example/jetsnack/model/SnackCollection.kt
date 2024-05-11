@@ -32,8 +32,7 @@ enum class CollectionType { Normal, Highlight }
 /**
  * A fake repo
  */
-object SnackRepo {
-    private lateinit var viewModel: SnackViewModel
+class SnackRepo(private var viewModel: SnackViewModel) {
 
     private val tastyTreats = SnackCollection(
         id = 1L,
