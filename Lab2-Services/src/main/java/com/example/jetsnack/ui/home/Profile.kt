@@ -17,9 +17,13 @@
 package com.example.jetsnack.ui.home
 
 import android.content.res.Configuration
+import android.content.res.Resources
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -38,7 +42,6 @@ import androidx.compose.ui.unit.dp
 import com.example.jetsnack.R
 import com.example.jetsnack.ui.components.JetsnackScaffold
 import com.example.jetsnack.ui.theme.JetsnackTheme
-
 @Composable
 fun Profile(
     onNavigateToRoute: (String) -> Unit,
@@ -58,38 +61,123 @@ fun Profile(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
-                .wrapContentSize()
                 .padding(24.dp)
                 .padding(paddingValues)
         ) {
-            Image(
-                painterResource(R.drawable.empty_state_search),
-                contentDescription = null
-            )
-            Spacer(Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(32.dp))
+            // Profile Information Text
             Text(
-                text = stringResource(R.string.work_in_progress),
-                style = MaterialTheme.typography.subtitle1,
+                text = stringResource(id = R.string.profile_information),
                 textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+                style = MaterialTheme.typography.h6,
+                color = JetsnackTheme.colors.brand,
+                modifier = Modifier.padding(8.dp)
             )
-            Spacer(Modifier.height(16.dp))
-            Text(
-                text = stringResource(R.string.grab_beverage),
-                style = MaterialTheme.typography.body2,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
+            Spacer(modifier = Modifier.height(32.dp))
+            // Name
+            Row(
+                horizontalArrangement = Arrangement.Start
+            ) {
+                Text(
+                    text = stringResource(id = R.string.name) + ":",
+                    style = MaterialTheme.typography.h6,
+                    color = JetsnackTheme.colors.brand,
+                    modifier = Modifier.padding(8.dp)
+                )
+                Text(
+                    text = "John Doe", // Replace with actual name from mockable.io
+                    style = MaterialTheme.typography.body2,
+                    modifier = Modifier.padding(12.dp)
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            // Email
+            Row(
+                horizontalArrangement = Arrangement.Start
+            ) {
+                Text(
+                    text = stringResource(id = R.string.email) + ":",
+                    style = MaterialTheme.typography.h6,
+                    color = JetsnackTheme.colors.brand,
+                    modifier = Modifier.padding(8.dp)
+                )
+                Text(
+                    text = "john.doe@example.com", // Replace with actual email from mockable.io
+                    style = MaterialTheme.typography.body2,
+                    modifier = Modifier.padding(12.dp)
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            // Phone number
+            Row(
+                horizontalArrangement = Arrangement.Start
+            ) {
+                Text(
+                    text = stringResource(id = R.string.phone_number) + ":",
+                    style = MaterialTheme.typography.h6,
+                    color = JetsnackTheme.colors.brand,
+                    modifier = Modifier.padding(8.dp)
+                )
+                Text(
+                    text = "555-123-4567", // Replace with actual phone number from mockable.io
+                    style = MaterialTheme.typography.body2,
+                    modifier = Modifier.padding(12.dp)
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            // Adress
+            Row(
+                horizontalArrangement = Arrangement.Start
+            ) {
+                Text(
+                    text = stringResource(id = R.string.address) + ":",
+                    style = MaterialTheme.typography.h6,
+                    color = JetsnackTheme.colors.brand,
+                    modifier = Modifier.padding(8.dp)
+                )
+                Text(
+                    text = "Avenie 24, 12345 City", // Replace with actual name from mockable.io
+                    style = MaterialTheme.typography.body2,
+                    modifier = Modifier.padding(12.dp)
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Favorite snacks Text
+            Row(
+                horizontalArrangement = Arrangement.Start
+            ) {
+                // Favorite snacks Text
+                Text(
+                    text = stringResource(id = R.string.favorite_snacks) + ":",
+                    style = MaterialTheme.typography.h6,
+                    color = JetsnackTheme.colors.brand,
+                    modifier = Modifier.padding(8.dp)
+                )
+
+// Column to display favorite snacks as a list
+                Column(
+                    modifier = Modifier.padding(12.dp)
+                ) {
+                    val favoriteSnacks = listOf( // Replace with mockable.io calling
+                        "Cupcake",
+                        "Donut",
+                        "Pretzels",
+                        "Brownie",
+                        "Ice Cream"
+                    )
+                    // Iterate through the list of favorite snacks and display each one as a Text composable
+                    favoriteSnacks.forEach { snack ->
+                        Text(
+                            text = snack,
+                            style = MaterialTheme.typography.body2
+                        )
+                    }
+                }
+            }
+
         }
     }
 }
 
-@Preview("default")
-@Preview("dark theme", uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Preview("large font", fontScale = 2f)
-@Composable
-fun ProfilePreview() {
-    JetsnackTheme {
-        Profile(onNavigateToRoute = { })
-    }
-}
+
