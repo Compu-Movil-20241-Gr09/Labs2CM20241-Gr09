@@ -40,13 +40,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetsnack.R
+import com.example.jetsnack.ui.SnackViewModel
 import com.example.jetsnack.ui.components.JetsnackScaffold
 import com.example.jetsnack.ui.theme.JetsnackTheme
 @Composable
 fun Profile(
+    viewModel: SnackViewModel,
     onNavigateToRoute: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val users = viewModel.getUsers()
+    val random = users.indices.random()
+    val user = users[random]
     JetsnackScaffold(
         bottomBar = {
             JetsnackBottomBar(
@@ -85,7 +90,7 @@ fun Profile(
                     modifier = Modifier.padding(8.dp)
                 )
                 Text(
-                    text = "John Doe", // Replace with actual name from mockable.io
+                    text = user.name,
                     style = MaterialTheme.typography.body2,
                     modifier = Modifier.padding(12.dp)
                 )
@@ -102,7 +107,7 @@ fun Profile(
                     modifier = Modifier.padding(8.dp)
                 )
                 Text(
-                    text = "john.doe@example.com", // Replace with actual email from mockable.io
+                    text = user.email,
                     style = MaterialTheme.typography.body2,
                     modifier = Modifier.padding(12.dp)
                 )
@@ -119,7 +124,7 @@ fun Profile(
                     modifier = Modifier.padding(8.dp)
                 )
                 Text(
-                    text = "555-123-4567", // Replace with actual phone number from mockable.io
+                    text = user.phone,
                     style = MaterialTheme.typography.body2,
                     modifier = Modifier.padding(12.dp)
                 )
@@ -136,7 +141,7 @@ fun Profile(
                     modifier = Modifier.padding(8.dp)
                 )
                 Text(
-                    text = "Avenie 24, 12345 City", // Replace with actual name from mockable.io
+                    text = user.address,
                     style = MaterialTheme.typography.body2,
                     modifier = Modifier.padding(12.dp)
                 )
@@ -159,13 +164,7 @@ fun Profile(
                 Column(
                     modifier = Modifier.padding(12.dp)
                 ) {
-                    val favoriteSnacks = listOf( // Replace with mockable.io calling
-                        "Cupcake",
-                        "Donut",
-                        "Pretzels",
-                        "Brownie",
-                        "Ice Cream"
-                    )
+                    val favoriteSnacks = user.favoriteSnacks
                     // Iterate through the list of favorite snacks and display each one as a Text composable
                     favoriteSnacks.forEach { snack ->
                         Text(

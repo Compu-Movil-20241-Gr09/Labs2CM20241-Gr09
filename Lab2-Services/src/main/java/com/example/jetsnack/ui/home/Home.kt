@@ -92,7 +92,7 @@ fun NavGraphBuilder.addHomeGraph(
         Cart(snackViewModel = viewModel, onSnackClick = { id -> onSnackSelected(id, from) }, onNavigateToRoute, modifier)
     }
     composable(HomeSections.PROFILE.route) {
-        Profile(onNavigateToRoute, modifier)
+        Profile(viewModel, onNavigateToRoute, modifier)
     }
 }
 
