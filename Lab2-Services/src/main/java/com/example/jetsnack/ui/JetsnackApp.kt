@@ -41,8 +41,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.example.jetsnack.R
-import com.example.jetsnack.model.SnackRepo
 import com.example.jetsnack.ui.home.HomeSections
+import com.example.jetsnack.ui.home.LoginScreen
 import com.example.jetsnack.ui.home.addHomeGraph
 import com.example.jetsnack.ui.navigation.MainDestinations
 import com.example.jetsnack.ui.navigation.rememberJetsnackNavController
@@ -58,16 +58,20 @@ fun JetsnackApp() {
         when (snackViewModel.snackUiState){
             is SnackUiState.Loading -> JetsnackLoading()
             is SnackUiState.Success -> {
-                NavHost(
-                    navController = jetsnackNavController.navController,
-                    startDestination = MainDestinations.HOME_ROUTE
-                ) {
-                    jetsnackNavGraph(
-                        viewModel = snackViewModel,
-                        onSnackSelected = jetsnackNavController::navigateToSnackDetail,
-                        upPress = jetsnackNavController::upPress,
-                        onNavigateToRoute = jetsnackNavController::navigateToBottomBarRoute
-                    )
+                if (snackViewModel.getLoggedInUser() != null){
+                    NavHost(
+                        navController = jetsnackNavController.navController,
+                        startDestination = MainDestinations.HOME_ROUTE
+                    ) {
+                        jetsnackNavGraph(
+                            viewModel = snackViewModel,
+                            onSnackSelected = jetsnackNavController::navigateToSnackDetail,
+                            upPress = jetsnackNavController::upPress,
+                            onNavigateToRoute = jetsnackNavController::navigateToBottomBarRoute
+                        )
+                    }
+                } else {
+                    LoginScreen(snackViewModel)
                 }
             }
             is SnackUiState.Error -> JetsnackError(retryAction = snackViewModel::getData)

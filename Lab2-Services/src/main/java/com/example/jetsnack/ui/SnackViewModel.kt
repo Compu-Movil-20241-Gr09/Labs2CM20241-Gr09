@@ -20,7 +20,8 @@ import java.io.IOException
 sealed interface SnackUiState {
     data class Success(
         val snacks: List<Snack>,
-        val users: List<User>
+        val users: List<User>,
+        val loggedInUser: User? = null
     ): SnackUiState
     object Error : SnackUiState
     object Loading : SnackUiState
@@ -67,6 +68,27 @@ class SnackViewModel(private val snackRepository: SnackRepository): ViewModel() 
         return when (snackUiState) {
             is SnackUiState.Success -> (snackUiState as SnackUiState.Success).users
             else -> emptyList()
+        }
+    }
+
+    fun logIn(email: String, password: String): Boolean {
+        for (user in getUsers()) {
+            if (user.email == email && user.password == password) {
+                snackUiState = SnackUiState.Success(getSnacks(), getUsers(), user)
+                return true
+            }
+        }
+        return false
+    }
+
+    fun logOut() {
+        snackUiState = SnackUiState.Success(getSnacks(), getUsers())
+    }
+
+    fun getLoggedInUser(): User? {
+        return when (snackUiState) {
+            is SnackUiState.Success -> (snackUiState as SnackUiState.Success).loggedInUser
+            else -> null
         }
     }
 

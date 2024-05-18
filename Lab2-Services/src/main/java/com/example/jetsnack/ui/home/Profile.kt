@@ -29,8 +29,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Logout
+import androidx.compose.material.icons.filled.Logout
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,9 +55,7 @@ fun Profile(
     onNavigateToRoute: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val users = viewModel.getUsers()
-    val random = users.indices.random()
-    val user = users[random]
+    val user = viewModel.getLoggedInUser()
     JetsnackScaffold(
         bottomBar = {
             JetsnackBottomBar(
@@ -70,6 +74,9 @@ fun Profile(
                 .padding(paddingValues)
         ) {
             Spacer(modifier = Modifier.height(32.dp))
+            IconButton(onClick = { viewModel.logOut() }, modifier = Modifier.align(Alignment.End)) {
+                Icon(imageVector = Icons.AutoMirrored.Filled.Logout, contentDescription = "Logout")
+            }
             // Profile Information Text
             Text(
                 text = stringResource(id = R.string.profile_information),
@@ -89,11 +96,13 @@ fun Profile(
                     color = JetsnackTheme.colors.brand,
                     modifier = Modifier.padding(8.dp)
                 )
-                Text(
-                    text = user.name,
-                    style = MaterialTheme.typography.body2,
-                    modifier = Modifier.padding(12.dp)
-                )
+                if (user != null) {
+                    Text(
+                        text = user.name,
+                        style = MaterialTheme.typography.body2,
+                        modifier = Modifier.padding(12.dp)
+                    )
+                }
             }
             Spacer(modifier = Modifier.height(16.dp))
             // Email
@@ -106,11 +115,13 @@ fun Profile(
                     color = JetsnackTheme.colors.brand,
                     modifier = Modifier.padding(8.dp)
                 )
-                Text(
-                    text = user.email,
-                    style = MaterialTheme.typography.body2,
-                    modifier = Modifier.padding(12.dp)
-                )
+                if (user != null) {
+                    Text(
+                        text = user.email,
+                        style = MaterialTheme.typography.body2,
+                        modifier = Modifier.padding(12.dp)
+                    )
+                }
             }
             Spacer(modifier = Modifier.height(16.dp))
             // Phone number
@@ -123,11 +134,13 @@ fun Profile(
                     color = JetsnackTheme.colors.brand,
                     modifier = Modifier.padding(8.dp)
                 )
-                Text(
-                    text = user.phone,
-                    style = MaterialTheme.typography.body2,
-                    modifier = Modifier.padding(12.dp)
-                )
+                if (user != null) {
+                    Text(
+                        text = user.phone,
+                        style = MaterialTheme.typography.body2,
+                        modifier = Modifier.padding(12.dp)
+                    )
+                }
             }
             Spacer(modifier = Modifier.height(16.dp))
             // Adress
@@ -140,11 +153,13 @@ fun Profile(
                     color = JetsnackTheme.colors.brand,
                     modifier = Modifier.padding(8.dp)
                 )
-                Text(
-                    text = user.address,
-                    style = MaterialTheme.typography.body2,
-                    modifier = Modifier.padding(12.dp)
-                )
+                if (user != null) {
+                    Text(
+                        text = user.address,
+                        style = MaterialTheme.typography.body2,
+                        modifier = Modifier.padding(12.dp)
+                    )
+                }
             }
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -160,13 +175,13 @@ fun Profile(
                     modifier = Modifier.padding(8.dp)
                 )
 
-// Column to display favorite snacks as a list
+                // Column to display favorite snacks as a list
                 Column(
                     modifier = Modifier.padding(12.dp)
                 ) {
-                    val favoriteSnacks = user.favoriteSnacks
+                    val favoriteSnacks = user?.favoriteSnacks
                     // Iterate through the list of favorite snacks and display each one as a Text composable
-                    favoriteSnacks.forEach { snack ->
+                    favoriteSnacks?.forEach { snack ->
                         Text(
                             text = snack,
                             style = MaterialTheme.typography.body2
